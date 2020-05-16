@@ -5,6 +5,11 @@ terraform {
   }
 }
 
+provider "azurerm" {
+  version = "=2.0.0"
+  features {}
+}
+
 variable "resource_group_name" {
   default = "tsg-tf-rg"
   description = "The name of the resource group"
