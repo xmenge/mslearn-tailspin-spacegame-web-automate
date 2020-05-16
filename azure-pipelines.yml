@@ -76,11 +76,11 @@ stages:
     variables:
     - group: Release
     steps: 
-      - script: |
+    - script: |
         # Exit when any command returns a failure status
         set -e
 
-        # Write terraform.tfvars
+        # Write terraform variable file 
         echo 'resource_group_location = "'$(ResourceGroupLocation)'"' | tee terraform.tfvars
         
         # Write backend.tfvars
