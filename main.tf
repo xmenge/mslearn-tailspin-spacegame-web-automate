@@ -6,7 +6,7 @@ terraform {
 }
 
 variable "resource_group_name" {
-  default = "tailspin-space-game-rg"
+  default = "tsg-tf-rg"
   description = "The name of the resource group"
 }
 
@@ -15,12 +15,12 @@ variable "resource_group_location" {
 }
 
 variable "app_service_plan_name" {
-  default = "tailspin-space-game-asp"
+  default = "tsg-asp"
   description = "The name of the app service plan"
 }
 
 variable "app_service_name_prefix" {
-  default = "tailspin-space-game-web"
+  default = "tsg-web"
   description = "The beginning part of your App Service host name"
 }
 
@@ -30,28 +30,28 @@ resource "random_integer" "app_service_name_suffix" {
 }
 
 resource "azurerm_resource_group" "spacegame" {
-  name     = "${var.resource_group_name}"
-  location = "${var.resource_group_location}"
+  name     = var.resource_group_name
+  location = var.resource_group_location
 }
 
 resource "azurerm_app_service_plan" "spacegame" {
-  name                = "${var.app_service_plan_name}"
-  location            = "${azurerm_resource_group.spacegame.location}"
-  resource_group_name = "${azurerm_resource_group.spacegame.name}"
+  name                = var.app_service_plan_name
+  location            = azurerm_resource_group.spacegame.location
+  resource_group_name = azurerm_resource_group.spacegame.name
   kind                = "Linux"
   reserved            = true
 
   sku {
-    tier = "Basic"
-    size = "B1"
+    tier = "FREE"
+    size = "F1"
   }
 }
 
 resource "azurerm_app_service" "spacegame_dev" {
-  name                = "${var.app_service_name_prefix}-dev-${random_integer.app_service_name_suffix.result}"
-  location            = "${azurerm_resource_group.spacegame.location}"
-  resource_group_name = "${azurerm_resource_group.spacegame.name}"
-  app_service_plan_id = "${azurerm_app_service_plan.spacegame.id}"
+  name                = var.app_service_name_prefix"-dev-"random_integer.app_service_name_suffix.result
+  location            = azurerm_resource_group.spacegame.location
+  resource_group_name = azurerm_resource_group.spacegame.name
+  app_service_plan_id = azurerm_app_service_plan.spacegame.id
 
   site_config {
     linux_fx_version = "DOTNETCORE|3.1"
@@ -60,10 +60,10 @@ resource "azurerm_app_service" "spacegame_dev" {
 }
 
 output "appservice_name_dev" {
-  value       = "${azurerm_app_service.spacegame_dev.name}"
+  value       = azurerm_app_service.spacegame_dev.name
   description = "The App Service name for the dev environment"
 }
 output "website_hostname_dev" {
-  value       = "${azurerm_app_service.spacegame_dev.default_site_hostname}"
+  value       = azurerm_app_service.spacegame_dev.default_site_hostname
   description = "The hostname of the website in the dev environment"
 }
