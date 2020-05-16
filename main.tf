@@ -2,6 +2,10 @@ terraform {
   required_version = "> 0.12.0"
 
   backend "azurerm" {
+    # resource_group_name  = "tf-storage-rg"
+    # storage_account_name = "tfsa000"
+    # container_name       = "tfstate"
+    # key                  = "terraform.tfstate"
   }
 }
 
@@ -20,12 +24,12 @@ variable "resource_group_location" {
 }
 
 variable "app_service_plan_name" {
-  default = "tsg-asp"
+  default = "tsg-tf-asp"
   description = "The name of the app service plan"
 }
 
 variable "app_service_name_prefix" {
-  default = "tsg-web"
+  default = "tsg-tf-web"
   description = "The beginning part of your App Service host name"
 }
 
@@ -64,7 +68,7 @@ resource "azurerm_app_service" "spacegame_dev" {
   # }
 }
 
-output "appservice_name_dev" {
+output "appservice_name" {
   value       = azurerm_app_service.spacegame_dev.name
   description = "The App Service name for the dev environment"
 }
