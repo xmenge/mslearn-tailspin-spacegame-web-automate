@@ -119,7 +119,7 @@ stages:
         ARM_TENANT_ID: $(ARM_TENANT_ID)
         ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
     - script: |
-        echo "##vso[task.setvariable variable=WebAppNameDev1;isOutput=true]$(RunTerraform.WebAppNameDev)"
+        echo "##vso[task.setvariable variable=WebAppNameDev1;isOutput=true]$(WebAppNameDev)"
         echo ">>>>>>>>>>>>>> after setvariable $WebAppNameDev1"
       name: setvar
 
