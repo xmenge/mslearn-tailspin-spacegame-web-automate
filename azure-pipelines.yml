@@ -101,16 +101,8 @@ stages:
 
         # Write the WebAppNameDev variable to the pipeline
         echo "##vso[task.setvariable variable=WebAppNameDev1;isOutput=true]$WebAppNameDev"
-        echo "##vso[task.setvariable variable=WebAppNameDev2;isOutput=true]$(WebAppNameDev)"
-        echo "##vso[task.setvariable variable=WebAppNameDev33;isOutput=true]'tf-aaaa'"
-        echo "##vso[task.setvariable variable=WebAppNameDev4;isOutput=true]terraform output appservice_name_dev"
-        echo "##vso[task.setvariable variable=WebAppNameDev5;isOutput=true](terraform output appservice_name_dev)"
-
         echo "++++++++++++++++++++++ WebAppNameDev1 = $WebAppNameDev1"
-        echo "++++++++++++++++++++++ WebAppNameDev2 = $WebAppNameDev2"
-        echo "++++++++++++++++++++++ WebAppNameDev3 = $WebAppNameDev33"
-        echo "++++++++++++++++++++++ WebAppNameDev4 = $WebAppNameDev4"
-        echo "++++++++++++++++++++++ WebAppNameDev5 = $WebAppNameDev5"
+
       name: "RunTerraform"
       displayName: "Run Terraform"
       env:
@@ -118,15 +110,11 @@ stages:
         ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
         ARM_TENANT_ID: $(ARM_TENANT_ID)
         ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
-    - script: |
-        echo "##vso[task.setvariable variable=WebAppNameDev1;isOutput=true]$(WebAppNameDev)"
-        echo ">>>>>>>>>>>>>> after setvariable $WebAppNameDev1"
-      name: setvar
 
   - deployment: Deploy
     dependsOn: Provision
     variables:
-      WebAppNameDev: $[ dependencies.Provision.outputs['setvar.WebAppNameDev1'] ]
+      WebAppNameDev: $[ dependencies.Provision.outputs['RunTerraform.WebAppNameDev1'] ]
     pool:
       vmImage: 'ubuntu-16.04'
     environment: dev
