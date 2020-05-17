@@ -100,8 +100,9 @@ stages:
         echo ">>>>>>>>>>>>>>>>>>>>>> WebAppNameDev = $WebAppNameDev"
 
         # Write the WebAppNameDev variable to the pipeline
-        echo "##vso[task.setvariable variable=WebAppNameDev1;isOutput=true;]$($WebAppNameDev)"
-        echo ">>>>>>>>>>>>>>>>>>>>>> WebAppNameDev1 = $WebAppNameDev1"
+        # echo "##vso[task.setvariable variable=WebAppNameDev1;isOutput=true;]$($WebAppNameDev)"
+        echo "##vso[task.setvariable variable=WebAppNameDev1;isOutput=true]$($WebAppNameDev)"
+        echo "++++++++++++++++++++++ WebAppNameDev1 = $WebAppNameDev1"
       name: "RunTerraform"
       displayName: "Run Terraform"
       env:
@@ -113,7 +114,7 @@ stages:
   - deployment: Deploy
     dependsOn: Provision
     variables:
-      WebAppNameDev: $[ dependencies.Provision.outputs['RunTerraform.WebAppNameDev1'] ]
+      WebAppNameDev: $[ dependencies.Provision.outputs['RunTerraform.WebAppNameDev'] ]
     pool:
       vmImage: 'ubuntu-16.04'
     environment: dev
