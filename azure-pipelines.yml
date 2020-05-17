@@ -120,6 +120,7 @@ stages:
       runOnce:
         deploy:
           steps:
+          - script: echo "************* WebAppNameDev = $WebAppNameDev"
           - download: current
             artifact: drop
           - task: AzureWebApp@1
