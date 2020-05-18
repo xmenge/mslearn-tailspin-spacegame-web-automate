@@ -134,7 +134,7 @@ stages:
           
           - bash: |
               WebAppName = $(cat $(Pipeline.Workspace)/vars/WebAppNameDev)
-              echo "##vso[task.setvariable variable=WebAppNameDev]$WebAppName"
+              echo "##vso[task.setvariable variable=WebAppNameDev;isoutput=true]$WebAppName"
             name: val
 
           - script: |
