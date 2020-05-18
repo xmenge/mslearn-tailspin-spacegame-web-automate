@@ -100,7 +100,7 @@ stages:
         echo ">>>>>>>>>>>>>>>>>>>>>> WebAppNameDev = $WebAppNameDev"
         
         # create file in pipeline workspace to hold the env name
-        mkdir -p $(Pipeline.Workspace)/var
+        mkdir -p $(Pipeline.Workspace)/vars
         echo $WebAppNameDev > $(Pipeline.Workspace)/vars/WebAppNameDev
 
         # # Write the WebAppNameDev variable to the pipeline
@@ -141,7 +141,7 @@ stages:
 
           - download: current
             artifact: drop
-            
+
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
