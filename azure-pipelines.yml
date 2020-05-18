@@ -136,12 +136,12 @@ stages:
               echo "------------ before assign value"
               WebAppName=$(cat $(Pipeline.Workspace)/vars/WebAppNameDev)
               echo "------------ after assign value & before vso -- WebAppName = $WebAppName"
-              echo "##vso[task.setvariable variable=WebAppNameDev;isoutput=true]$WebAppName"
-              echo ">>>>>>>>>>>>>>>>>>>>>> WebAppName = $(out.WebAppNameDev)"
+              echo "##vso[task.setvariable variable=WebAppNameDev]$WebAppName"
+              echo ">>>>>>>>>>>>>>>>>>>>>> WebAppName = $(WebAppNameDev)"
             name: out
 
           - script: |
-              echo ">>>>>>>>>>>>>>>>>>>>>> WebAppNameDev = $(out.WebAppNameDev)"
+              echo ">>>>>>>>>>>>>>>>>>>>>> WebAppNameDev = $(WebAppNameDev)"
 
           - download: current
             artifact: drop
@@ -150,5 +150,5 @@ stages:
             displayName: 'Azure App Service Deploy: website'
             inputs:
               azureSubscription: 'Resource Manager - Tailspin - Space Game'
-              appName: '$(out.WebAppNameDev)'
+              appName: '$(WebAppNameDev)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
