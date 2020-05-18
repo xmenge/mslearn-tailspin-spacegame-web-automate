@@ -134,9 +134,9 @@ stages:
           
           - script: |
               echo "------------ before assign value"
-              WebAppName=$(cat $(Pipeline.Workspace)/vars/WebAppNameDev)
-              echo "------------ after assign value & before vso -- WebAppName = $WebAppName"
-              echo "##vso[task.setvariable variable=WebAppNameDev]$WebAppName"
+              WebAppNameDev=$(cat $(Pipeline.Workspace)/vars/WebAppNameDev)
+              echo "------------ after assign value & before vso -- WebAppNameDev = $WebAppNameDev"
+              echo "##vso[task.setvariable variable=WebAppNameDev]$WebAppNameDev"
               echo ">>>>>>>>>>>>>>>>>>>>>> WebAppName = $(WebAppNameDev)"
             name: out
 
