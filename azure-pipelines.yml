@@ -115,7 +115,7 @@ stages:
         ARM_TENANT_ID: $(ARM_TENANT_ID)
         ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
 
-    - publish: $$(Pipeline.Workspace)/vars
+    - publish: $(Pipeline.Workspace)/vars
       artifact: vars
 
   - deployment: Deploy
