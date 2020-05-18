@@ -132,9 +132,11 @@ stages:
           - download: current
             artifact: vars
           
-          - bash: |
+          - script: |
               WebAppName = $(cat $(Pipeline.Workspace)/vars/WebAppNameDev)
-              echo "##vso[task.setvariable variable=WebAppNameDev;isoutput=true]$WebAppName"
+              echo "------------ before ##vso -- WebAppName = $WebAppName"
+              echo "##vso[task.setvariable variable=WebAppNameDev;isOutput=true]$WebAppName"
+              echo "------------ after ##vso -- WebAppNameDev = $(WebAppNameDev)"
             name: val
 
           - script: |
