@@ -141,7 +141,7 @@ stages:
             name: out
 
           - script: |
-              echo ">>>>>>>>>>>>>>>>>>>>>> WebAppNameDev = $(WebAppNameDev)"
+              echo ">>>>>>>>>>>>>>>>>>>>>> WebAppNameDev = $(out.WebAppNameDev)"
 
           - download: current
             artifact: drop
@@ -150,5 +150,5 @@ stages:
             displayName: 'Azure App Service Deploy: website'
             inputs:
               azureSubscription: 'Resource Manager - Tailspin - Space Game'
-              appName: '$(WebAppNameDev)'
+              appName: '$(out.WebAppNameDev)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
