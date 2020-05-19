@@ -98,14 +98,16 @@ stages:
         # Get the App Service name for the dev environment.
         WebAppNameDev=$(terraform output appservice_name_dev)
         echo ">>>>>>>>>>>>>>>>>>>>>> WebAppNameDev = $WebAppNameDev"
+        echo ">>>>>>>>>>>>>>>>>>>>>> WebAppNameDev() = $(WebAppNameDev)"
         
         # create file in pipeline workspace to hold the env name
         mkdir -p $(Pipeline.Workspace)/vars
         echo $WebAppNameDev > $(Pipeline.Workspace)/vars/WebAppNameDev
 
         # # Write the WebAppNameDev variable to the pipeline
-        # echo "##vso[task.setvariable variable=WebAppNameDev1;isOutput=true]$WebAppNameDev"
-        # echo "++++++++++++++++++++++ WebAppNameDev1 = $WebAppNameDev1"
+        echo "##vso[task.setvariable variable=WebAppNameDev0;isOutput=true]$WebAppNameDev"
+        echo "++++++++++++++++++++++ WebAppNameDev0 = $WebAppNameDev0"
+        echo "++++++++++++++++++++++ WebAppNameDev0() = $(WebAppNameDev0)"
 
       name: "RunTerraform"
       displayName: "Run Terraform"
@@ -121,7 +123,7 @@ stages:
   - deployment: Deploy
     dependsOn: Provision
     variables:
-      WebAppNameDev: $[ dependencies.Provision.outputs['RunTerraform.WebAppNameDev1'] ]
+      WebAppNameDev0: $[ dependencies.Provision.outputs['RunTerraform.WebAppNameDev0'] ]
     pool:
       vmImage: 'ubuntu-16.04'
     environment: dev
@@ -133,16 +135,23 @@ stages:
             artifact: vars
           
           - script: |
-              echo "------------ before assign value ------------------"
-              export WebAppNameDev=$(cat $(Pipeline.Workspace)/vars/WebAppNameDev)
-              echo "------------ after assign value & before vso -- WebAppNameDev = $(WebAppNameDev)"
-              echo "##vso[task.setvariable variable=WebAppNameDev1;isOutput=true]$WebAppNameDev"
-              echo ">>>>>>>>>>>>>>>>>>>>>> WebAppNameDev1 = $WebAppNameDev1 <<<<<<<<<<<<<<<<<<<<<<"
+              WebAppNameDev=$(cat $(Pipeline.Workspace)/vars/WebAppNameDev)
+              echo "------------ after retrieving value & before vso -- WebAppNameDev = $WebAppNameDev"
+              echo "------------ after retrieving value & before vso -- WebAppNameDev() = $(WebAppNameDev)"
+              echo "##vso[task.setvariable variable=WebAppNameDev1;]$WebAppNameDev"
+              echo "++++++++++++++++++++++ WebAppNameDev0 = $WebAppNameDev0"
+              echo "++++++++++++++++++++++ WebAppNameDev0() = $(WebAppNameDev0)"
+              echo ">>>>>>>>>>>>>>>>>>>>>> WebAppNameDev1 = $WebAppNameDev1"
+              echo ">>>>>>>>>>>>>>>>>>>>>> WebAppNameDev1() = $(WebAppNameDev1)"
             name: out
 
           - script: |
-              echo "++++++++++++++++++++++ WebAppNameDev1 = $(out.WebAppNameDev1)"
+              echo "++++++++++++++++++++++ WebAppNameDev = $WebAppNameDev"
+              echo "++++++++++++++++++++++ WebAppNameDev() = $(WebAppNameDev)"
+              echo "++++++++++++++++++++++ WebAppNameDev0 = $WebAppNameDev0"
+              echo "++++++++++++++++++++++ WebAppNameDev0() = $(WebAppNameDev0)"
               echo "++++++++++++++++++++++ WebAppNameDev1 = $WebAppNameDev1"
+              echo "++++++++++++++++++++++ WebAppNameDev1() = $(WebAppNameDev1)"
 
           - download: current
             artifact: drop
@@ -151,5 +160,5 @@ stages:
             displayName: 'Azure App Service Deploy: website'
             inputs:
               azureSubscription: 'Resource Manager - Tailspin - Space Game'
-              appName: '$(out.WebAppNameDev1)'
+              appName: '$(WebAppNameDev0)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
