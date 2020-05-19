@@ -136,14 +136,19 @@ stages:
               WebAppNameDev=$(cat $(Pipeline.Workspace)/vars/WebAppNameDev)
               echo "------------ after retrieving value & before vso -- WebAppNameDev = $WebAppNameDev"
               echo "##vso[task.setvariable variable=WebAppNameDev1;]$WebAppNameDev"
-              echo ">>>>>>>>>>>>>>>>>>>>>> WebAppNameDev1 = $(WebAppNameDev1) <<<<<<<<<<<<<<<<<<<<<<"
+              echo "++++++++++++++++++++++ WebAppNameDev0 = $WebAppNameDev0"
+              echo "++++++++++++++++++++++ WebAppNameDev0() = $(WebAppNameDev0)"
+              echo ">>>>>>>>>>>>>>>>>>>>>> WebAppNameDev1 = $WebAppNameDev1 <<<<<<<<<<<<<<<<<<<<<<"
+              echo ">>>>>>>>>>>>>>>>>>>>>> WebAppNameDev1() = $(WebAppNameDev1) <<<<<<<<<<<<<<<<<<<<<<"
             name: out
 
           - script: |
-              echo "++++++++++++++++++++++ WebAppNameDev = $(WebAppNameDev)"
-              echo "++++++++++++++++++++++ WebAppNameDev0 = $(WebAppNameDev0)"
-              echo "++++++++++++++++++++++ WebAppNameDev1 = $(WebAppNameDev1)"
+              echo "++++++++++++++++++++++ WebAppNameDev = $WebAppNameDev"
+              echo "++++++++++++++++++++++ WebAppNameDev() = $(WebAppNameDev)"
+              echo "++++++++++++++++++++++ WebAppNameDev0 = $WebAppNameDev0"
+              echo "++++++++++++++++++++++ WebAppNameDev0() = $(WebAppNameDev0)"
               echo "++++++++++++++++++++++ WebAppNameDev1 = $WebAppNameDev1"
+              echo "++++++++++++++++++++++ WebAppNameDev1() = $(WebAppNameDev1)"
 
           - download: current
             artifact: drop
