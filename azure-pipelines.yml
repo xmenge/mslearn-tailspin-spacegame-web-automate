@@ -134,7 +134,7 @@ stages:
           
           - script: |
               echo "------------ before assign value"
-              WebAppNameDev=$(cat $(Pipeline.Workspace)/vars/WebAppNameDev)
+              export WebAppNameDev=$(cat $(Pipeline.Workspace)/vars/WebAppNameDev)
               echo "------------ after assign value & before vso -- WebAppNameDev = $WebAppNameDev"
               echo "##vso[task.setvariable variable=WebAppNameDev;isOutput=true]$(cat $(Pipeline.Workspace)/vars/WebAppNameDev)"
               echo ">>>>>>>>>>>>>>>>>>>>>> WebAppName = $(WebAppNameDev)"
