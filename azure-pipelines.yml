@@ -140,7 +140,7 @@ stages:
             name: out
 
           - script: |
-              echo "++++++++++++++++++++++ WebAppNameDev = $WebAppNameDev"
+              echo "++++++++++++++++++++++ WebAppNameDev = $(WebAppNameDev)"
               echo "++++++++++++++++++++++ WebAppNameDev0 = $(WebAppNameDev0)"
               echo "++++++++++++++++++++++ WebAppNameDev1 = $(WebAppNameDev1)"
               echo "++++++++++++++++++++++ WebAppNameDev1 = $WebAppNameDev1"
@@ -152,5 +152,5 @@ stages:
             displayName: 'Azure App Service Deploy: website'
             inputs:
               azureSubscription: 'Resource Manager - Tailspin - Space Game'
-              appName: '$(WebAppNameDev)'
+              appName: '$(WebAppNameDev0)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
