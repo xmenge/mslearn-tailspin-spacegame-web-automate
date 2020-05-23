@@ -1,0 +1,31 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "deployPrefix": {
+            "value": "-dev-"
+        },
+        "keyVaultName": {
+          "value": ""
+        },
+        "uniqueSuffix": {
+            "value": ""
+        },
+        "adminPassword": {
+            "reference": {
+              "keyVault": {
+                "id": ""
+              },
+              "secretName": "adminPassword"
+            }
+        },
+        "firstRun": {
+            "reference": {
+                "keyVault": {
+                    "id": ""
+                },
+                "secretName": "firstRun"
+            }
+        }
+    }
+}
