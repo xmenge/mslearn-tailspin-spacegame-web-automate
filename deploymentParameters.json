@@ -6,15 +6,15 @@
             "value": "-dev-"
         },
         "keyVaultName": {
-          "value": ""
+          "value": "tailspin-vault-3008"
         },
         "uniqueSuffix": {
-            "value": ""
+            "value": "3008"
         },
         "adminPassword": {
             "reference": {
               "keyVault": {
-                "id": ""
+                "id": "/subscriptions/caac4cf5-d520-43b5-b683-60e5eaf604f6/resourceGroups/tsg-web-rg/providers/Microsoft.KeyVault/vaults/tailspin-vault-3008"
               },
               "secretName": "adminPassword"
             }
@@ -22,10 +22,12 @@
         "firstRun": {
             "reference": {
                 "keyVault": {
-                    "id": ""
+                    "id": "/subscriptions/caac4cf5-d520-43b5-b683-60e5eaf604f6/resourceGroups/tsg-web-rg/providers/Microsoft.KeyVault/vaults/tailspin-vault-3008"
                 },
                 "secretName": "firstRun"
             }
         }
     }
 }
+
+
