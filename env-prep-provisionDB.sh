@@ -19,4 +19,9 @@ az keyvault secret set \
   --name "firstRun" \
   --value "true"
 
+az keyvault list \
+  --resource-group tsg-web-rg \
+  --query [].id \
+  --output tsv
+
   
