@@ -60,11 +60,11 @@
             "name": "[parameters('serverfarms_tailspin_space_game_asp_name')]",
             "location": "[parameters('location')]",
             "sku": {
-                "name": "S0",
-                "tier": "Standard",
-                "size": "S0",
-                "family": "S",
-                "capacity": 10
+                "name": "F1",
+                "tier": "FREE",
+                "size": "F1",
+                "family": "F",
+                "capacity": 1
             },
             "kind": "app",
             "properties": {
@@ -96,8 +96,9 @@
                 "[resourceId('Microsoft.Sql/servers', concat(parameters('servers_tailspin_space_game_sql_name'), variables('uniqueName')))]"
             ],
             "sku": {
-                "name": "S1",
-                "tier": "Standard"
+                "name": "S0",
+                "tier": "Standard",
+                "capacity": 10
             },
             "kind": "v12.0,user,vcore",
             "properties": {
