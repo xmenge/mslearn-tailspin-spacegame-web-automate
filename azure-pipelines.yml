@@ -145,7 +145,7 @@ stages:
             inputs:
               azureSubscription: 'Resource Manager - Tailspin - Space Game'
               authenticationType: 'server'
-              serverName: 'tailspin-space-game-sql-dev-$(uniqueSuffix).database.windows.net'
+              serverName: 'tsg-sql-dev-$(uniqueSuffix).database.windows.net'
               databaseName: 'tailspindatabase'
               sqlUsername: 'azuresql'
               sqlPassword: '$(adminPassword)'
@@ -224,7 +224,7 @@ stages:
             inputs:
               azureSubscription: 'Resource Manager - Tailspin - Space Game'
               authenticationType: 'server'
-              serverName: 'tailspin-space-game-sql-dev-$(uniqueSuffix).database.windows.net'
+              serverName: 'tsg-sql-dev-$(uniqueSuffix).database.windows.net'
               databaseName: 'tailspindatabase'
               sqlUsername: 'azuresql'
               sqlPassword: '$(adminPassword)'
@@ -288,12 +288,12 @@ stages:
             displayName: 'Azure App Service Deploy: website'
             inputs:
               azureSubscription: 'Resource Manager - Tailspin - Space Game'
-              appName: 'tailspin-space-game-web-dev-$(uniqueSuffix)'
+              appName: 'tsg-web-dev-$(uniqueSuffix)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
           - task: AzureAppServiceSettings@1
             displayName: Azure App Service Settings
             inputs:
               azureSubscription: 'Resource Manager - Tailspin - Space Game'
-              appName: 'tailspin-space-game-web-dev-$(uniqueSuffix)'
+              appName: 'tsg-web-dev-$(uniqueSuffix)'
               connectionStrings: |
                 [{ "name": "DefaultConnection","value": "$(connectionString)","type": "SQLAzure","slotSetting": false }]
