@@ -60,11 +60,11 @@
             "name": "[parameters('serverfarms_tailspin_space_game_asp_name')]",
             "location": "[parameters('location')]",
             "sku": {
-                "name": "B1",
-                "tier": "Basic",
-                "size": "B1",
-                "family": "B",
-                "capacity": 1
+                "name": "S0",
+                "tier": "Standard",
+                "size": "S0",
+                "family": "S",
+                "capacity": 10
             },
             "kind": "app",
             "properties": {
