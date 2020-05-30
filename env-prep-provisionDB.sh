@@ -1,5 +1,7 @@
 UNIQUE_ID=3008
 
+az group create -n tsg-web-rg -l australiasoutheast
+
 az keyvault create \
   --name tailspin-vault-$UNIQUE_ID \
   --resource-group tsg-web-rg \
